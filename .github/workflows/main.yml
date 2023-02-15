@@ -16,12 +16,16 @@ jobs:
       - run: "sudo ls /etc/apt/*"
       - run: "sudo cat /etc/apt/sources.list.d/*"
       - run: "mkdir -p /home/runner/backup.sources.list.d/"
+      - run: apt-cache policy unixodbc
+      - run: apt-cache policy unixodbc-dev
+      - run: "echo -e 'Package: *\nPin: origin \"mirror.leaseweb.net\"\nPin-Priority: 1001' | sudo tee /etc/apt/preferences"
       - run: "sudo apt-get update"
       - run: "sudo apt-get -qq -y dist-upgrade"
-      - run: apt-cache showpkg unixodbc
       - run: "sudo apt-get install unixodbc"
+      - run: "sudo apt-get install unixodbc-dev"
       # - run: "sudo mv /etc/apt/sources.list.d/* /home/runner/backup.sources.list.d/"
-      - run: "echo -e 'Package: *\nPin: origin \"mirror.leaseweb.net\"\nPin-Priority: 1001' | sudo tee /etc/apt/preferences"
+      - run: apt-cache policy unixodbc
+      - run: apt-cache policy unixodbc-dev
       - run: "sudo cat /etc/apt/preferences"
       - run: "sudo apt-get update"
       - run: apt-cache showpkg unixodbc
