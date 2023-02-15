@@ -1,0 +1,17 @@
+---
+name: 'Build and test everything'
+
+on: [workflow_dispatch]
+
+jobs:
+  image-metadata:
+    name: image metadata
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: PowerDNS/pdns/set-ubuntu-mirror@meta
+      - uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: 5
+          submodules: recursive
+      - run: "sudo ls /etc/apt/ *"
+      - run: "sudo cat /etc/apt/sources.list.d/microsoft-prod.list
