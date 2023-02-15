@@ -16,6 +16,12 @@ jobs:
       - run: "sudo ls /etc/apt/*"
       - run: "sudo cat /etc/apt/sources.list.d/*"
       - run: "mkdir -p /home/runner/backup.sources.list.d/"
+      - run: "sudo apt-get update"
+      - run: "sudo apt-get -qq -y dist-upgrade"
+      - run: apt-cache showpkg unixodbc
+      - run: "sudo apt-get install unixodbc"
       - run: "sudo mv /etc/apt/sources.list.d/* /home/runner/backup.sources.list.d/"
-      - run: "sudo apt-get update && sudo apt-get dist-upgrade"
+      - run: "sudo apt-get update"
+      - run: apt-cache showpkg unixodbc
+      - run: "sudo apt-get remove unixodbc"
       - run: "sudo apt-get install unixodbc"
