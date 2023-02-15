@@ -13,5 +13,5 @@ jobs:
         with:
           fetch-depth: 5
           submodules: recursive
-      - run: "sudo ls /etc/apt/ *"
+      - run: "sudo ls /etc/apt/*"
       - run: "sudo cat /etc/apt/sources.list.d/microsoft-prod.list"
