@@ -21,7 +21,7 @@ jobs:
       - run: apt-cache showpkg unixodbc
       - run: "sudo apt-get install unixodbc"
       # - run: "sudo mv /etc/apt/sources.list.d/* /home/runner/backup.sources.list.d/"
-      - run: "echo -e 'Package: *\nPin: origin \"mirror.leaseweb.net\"nPin-Priority: 1001' | sudo tee /etc/apt/preferences"
+      - run: "echo -e 'Package: *\nPin: origin \"mirror.leaseweb.net\"\nPin-Priority: 1001' | sudo tee /etc/apt/preferences"
       - run: "sudo cat /etc/apt/preferences"
       - run: "sudo apt-get update"
       - run: apt-cache showpkg unixodbc
