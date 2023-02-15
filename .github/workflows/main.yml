@@ -14,4 +14,8 @@ jobs:
           fetch-depth: 5
           submodules: recursive
       - run: "sudo ls /etc/apt/*"
-      - run: "sudo cat /etc/apt/sources.list.d/microsoft-prod.list"
+      - run: "sudo cat /etc/apt/sources.list.d/*"
+      - run: "mkdir -p /home/runner/backup.sources.list.d/"
+      - run: "sudo mv /etc/apt/sources.list.d/* /home/runner/backup.sources.list.d/"
+      - run: "sudo apt-get update && sudo apt-get dist-upgrade"
+      - run: "sudo apt-get install unixodbc"
