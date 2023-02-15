@@ -18,7 +18,7 @@ jobs:
       - run: "mkdir -p /home/runner/backup.sources.list.d/"
       - run: apt-cache policy unixodbc
       - run: apt-cache policy unixodbc-dev
-      - run: "echo -e 'Package: *\nPin: origin \"mirror.leaseweb.net\"\nPin-Priority: 1001' | sudo tee /etc/apt/preferences"
+      - run: "echo -e 'Package: *odbc*\nPin: origin \"mirror.leaseweb.net\"\nPin-Priority: 1001' | sudo tee /etc/apt/preferences"
       - run: "sudo apt-get update"
       - run: "sudo apt-get -qq -y --allow-downgrades dist-upgrade"
       - run: "sudo apt-get install unixodbc"
