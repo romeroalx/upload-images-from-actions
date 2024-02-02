@@ -1,33 +1,16 @@
 ---
-name: 'Build and test everything'
+name: 'Documentation'
 
-on: [workflow_dispatch]
+on:
+  push:
+
+permissions:
+  contents: read
 
 jobs:
-  image-metadata:
-    name: image metadata
-    runs-on: docker.io/debian:11
+  build-upload-docs:
+    name: Build and upload docs
+    runs-on: ubuntu-22.04
     steps:
-      # - uses: PowerDNS/pdns/set-ubuntu-mirror@meta
-      - uses: actions/checkout@v3.1.0
-        with:
-          fetch-depth: 5
-          submodules: recursive
-      - run: "sudo ls /etc/apt/*"
-      - run: "sudo cat /etc/apt/sources.list.d/*"
-      - run: "mkdir -p /home/runner/backup.sources.list.d/"
-      - run: apt-cache policy unixodbc
-      - run: apt-cache policy unixodbc-dev
-      - run: "echo -e 'Package: *odbc*\nPin: origin \"mirror.leaseweb.net\"\nPin-Priority: 1001' | sudo tee /etc/apt/preferences"
-      - run: "sudo apt-get update"
-      - run: "sudo apt-get -qq -y --allow-downgrades dist-upgrade"
-      - run: "sudo apt-get install unixodbc"
-      - run: "sudo apt-get install unixodbc-dev"
-      # - run: "sudo mv /etc/apt/sources.list.d/* /home/runner/backup.sources.list.d/"
-      - run: apt-cache policy unixodbc
-      - run: apt-cache policy unixodbc-dev
-      - run: "sudo cat /etc/apt/preferences"
-      - run: "sudo apt-get update"
-      - run: apt-cache showpkg unixodbc
-      - run: "sudo apt-get remove unixodbc"
-      - run: "sudo apt-get install unixodbc"
+      - run: which pip
+      - run: pip list
