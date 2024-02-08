@@ -34,5 +34,8 @@ jobs:
       - run: pip list
       - run: docker ps --all
       - run: pip install Sphinx==1.8.6
-      - run: pip install sphinxcontrib-fulltoc
+      - run: pip install sphinxcontrib-fulltoc==1.2.0
+      - run: pip install https://github.com/PowerDNS/sphinxcontrib-openapi/archive/refs/heads/use-jsondomain-pdns-py3.10-noscm.zip
+      - run: pip install https://github.com/PowerDNS/sphinx-jsondomain/archive/refs/heads/no-type-links.zip
+      - run: docker logs $(docker ps | grep "epicwink/proxpi" | awk '{print $1}')
 
