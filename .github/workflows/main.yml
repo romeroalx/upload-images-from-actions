@@ -11,6 +11,28 @@ jobs:
   build-upload-docs:
     name: Build and upload docs
     runs-on: ubuntu-22.04
+    services:
+      database:
+        image: epicwink/proxpi
+        ports: 
+          - 5000:5000
+        # FIXME: this works around dist-upgrade stopping all docker containers. dist-upgrade is huge on these images anyway. Perhaps we do want to run our tasks in a Docker container too.
+        options: >-
+          --restart always
     steps:
-      - run: which pip
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 5
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: which pip; python3 --version
       - run: pip list
+      - run: pip config set global.index-url http://172.17.0.1:5000/index/
+      - run: pip config set global.trusted-host 172.17.0.1
+      - run: pip list
+      - run: docker ps --all
+      - run: pip install Sphinx==1.8.6
+      - run: pip install sphinxcontrib-fulltoc
+
